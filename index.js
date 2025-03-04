@@ -61,6 +61,7 @@ function createDiv(item) {
     const itemData = document.createElement("div");
 
     const img = document.createElement("img");
+    img.alt = item.name + " Board Game"
     img.src = item.image;
     div.appendChild(img);
 
