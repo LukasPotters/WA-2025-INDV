@@ -117,6 +117,11 @@ function createGame(event) {
 }
 
 function closeCreateForm() {
+    const nameElement = document.getElementById('name');
+    const durationElement = document.getElementById('duration');
+    const complexityElement = document.getElementById('complexity');
+    const playerCountElement = document.getElementById('playerCount');
+    
     document.getElementById('form-background').style.display = 'none';
 
     nameElement.value = "";
