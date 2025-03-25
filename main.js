@@ -1,10 +1,14 @@
-const express = require('express')
-const path = require('path')
-const fs = require('fs')
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
 
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
+
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const json = fs.readFileSync('items.json');
 const items = JSON.parse(json);
@@ -46,7 +50,6 @@ app.get('/api/items', (req, res) => {
   const sortOrder = req.query.sortOrder || "name-asc";
 
   const items = getItems(pageNumber, pageSize, playerCountFilter, sortOrder);
-
   res.json(items);
 });
 
@@ -58,8 +61,17 @@ app.get('/api/page-count', (req, res) => {
   res.json({ pageCount });
 });
 
-app.use(express.static(path.join(__dirname, '/public')));
+app.post('/api/add-item', (req, res) => {
+  const newItem = req.body;
+
+  items.push({ 
+    ...newItem,
+    image: 'images/placeholder.png'
+  });
+
+  res.redirect('/');
+});
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`);
 });
