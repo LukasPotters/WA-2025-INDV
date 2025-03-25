@@ -44,7 +44,7 @@
     <div id="form-background">
         <div class="form-container">
             <h2 class="form-title">Add Game</h2>
-            <form id="game-form" onsubmit="createGame(event)">
+            <form id="game-form" action="/api/add-item" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" placeholder="" required>
     
@@ -63,7 +63,6 @@
         </div>
     </div>
 
-    <script src="items.js"></script>
     <script src="index.js" defer></script>
 </body>
 </html>
