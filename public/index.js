@@ -1,57 +1,44 @@
 let pageNumber = 1;
 let itemsPerPage = 5;
 
-const sortFuncs = {
-    "name-asc": (a, b) => a.name.localeCompare(b.name),
-    "name-desc": (a, b) => b.name.localeCompare(a.name),
-    "duration-asc": (a, b) => a.duration - b.duration,
-    "duration-desc": (a, b) => b.duration - a.duration,
-    "complexity-asc": (a, b) => a.complexity - b.complexity,
-    "complexity-desc": (a, b) => b.complexity - a.complexity,
-};
-
 function reloadItems() {
-    let filteredItems = items.filter(item => {
-        const playerCountFilter = document.getElementById("player-count-filter").value;
-        if (playerCountFilter == "all") {
-            return true;
-        }
-        return item.playerCount == playerCountFilter;
-    });
-
+    const playerCountFilter = document.getElementById("player-count-filter").value;
     const sortOrder = document.getElementById("sort-order").value;
-    filteredItems.sort(sortFuncs[sortOrder]);
-
-
-    const container = document.getElementById("container");
-    container.innerHTML = "";
-
     const pageNumberElement = document.getElementById("page");
     pageNumberElement.textContent = pageNumber;
     document.title = "Page " + pageNumber;
 
-    if (pageNumber == 1) {
-        document.getElementById("prev").disabled = true;
-    } else {
-        document.getElementById("prev").disabled = false;
-    }
+    const items = fetch(`/api/items?page=${pageNumber}&size=${itemsPerPage}&playerCountFilter=${playerCountFilter}&sortOrder=${sortOrder}`)
+        .then(res => res.json());
 
-    if (pageNumber == Math.ceil(filteredItems.length / itemsPerPage)) {
-        document.getElementById("next").disabled = true;
-    } else {
-        document.getElementById("next").disabled = false;
-    }
+    items.then(items => {
+        const container = document.getElementById("container");
+        container.innerHTML = "";
 
-    for(let i=(pageNumber-1)*itemsPerPage; i<pageNumber*itemsPerPage; i++) {
-        const item = filteredItems[i];
-
-        if (!item) {
-            break;
+        if (pageNumber == 1) {
+            document.getElementById("prev").disabled = true;
+        } else {
+            document.getElementById("prev").disabled = false;
         }
-    
-        const div = createDiv(item);
-        container.appendChild(div);
-    }
+
+        const pageCount = fetch(`/api/page-count?size=${itemsPerPage}`)
+            .then(res => res.json())
+            .then(data => data.pageCount);
+
+        pageCount.then(pageCount => {
+
+            if (pageNumber == pageCount) {
+                document.getElementById("next").disabled = true;
+            } else {
+                document.getElementById("next").disabled = false;
+            }
+        });
+
+        for(const item of items) {
+            const div = createDiv(item);
+            container.appendChild(div);
+        }
+    });
 }
 
 function createDiv(item) {
@@ -93,27 +80,6 @@ function changePage(change) {
 function showCreateForm() {
     const formElement = document.getElementById("form-background");
     formElement.style.display = "flex";
-}
-
-function createGame(event) {
-    event.preventDefault();
-
-    const nameElement = document.getElementById('name');
-    const durationElement = document.getElementById('duration');
-    const complexityElement = document.getElementById('complexity');
-    const playerCountElement = document.getElementById('playerCount');
-
-    items.push({
-        name: nameElement.value,
-        duration: +durationElement.value,
-        complexity: +complexityElement.value,
-        playerCount: playerCountElement.value,
-        image: 'images/placeholder.png'
-    });
-
-    closeCreateForm();
-
-    reloadItems();
 }
 
 function closeCreateForm() {

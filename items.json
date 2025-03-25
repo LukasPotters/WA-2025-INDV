@@ -1,0 +1,93 @@
+[
+    {
+        "name": "Blokus",
+        "duration": 30,
+        "complexity": 1.7,
+        "playerCount": "2-4",
+        "image": "images/blokus.png"
+    },
+    {
+        "name": "Brass Birmingham",
+        "duration": 90,
+        "complexity": 3.9,
+        "playerCount": "2-4",
+        "image": "images/brass-birmingham.png"
+    },
+    {
+        "name": "Carcassonne",
+        "duration": 45,
+        "complexity": 1.9,
+        "playerCount": "2-5",
+        "image": "images/carcassonne.png"
+    },
+    {
+        "name": "Catan",
+        "duration": 60,
+        "complexity": 2.3,
+        "playerCount": "3-4",
+        "image": "images/catan.png"
+    },
+    {
+        "name": "Clank!",
+        "duration": 45,
+        "complexity": 2.2,
+        "playerCount": "2-4",
+        "image": "images/clank.png"
+    },
+    {
+        "name": "Cluedo",
+        "duration": 45,
+        "complexity": 1.7,
+        "playerCount": "2-6",
+        "image": "images/cluedo.png"
+    },
+    {
+        "name": "Levensweg",
+        "duration": 60,
+        "complexity": 1.2,
+        "playerCount": "2-6",
+        "image": "images/levensweg.png"
+    },
+    {
+        "name": "Monopoly",
+        "duration": 120,
+        "complexity": 1.6,
+        "playerCount": "2-8",
+        "image": "images/monopoly.png"
+    },
+    {
+        "name": "Pandemic",
+        "duration": 45,
+        "complexity": 2.4,
+        "playerCount": "2-4",
+        "image": "images/pandemic.png"
+    },
+    {
+        "name": "Risk",
+        "duration": 120,
+        "complexity": 2.1,
+        "playerCount": "2-6",
+        "image": "images/risk.png"
+    },
+    {
+        "name": "Sleeping Gods",
+        "duration": 1200,
+        "complexity": 3.2,
+        "playerCount": "1-4",
+        "image": "images/sleeping-gods.png"
+    },
+    {
+        "name": "Spirit Island",
+        "duration": 90,
+        "complexity": 4.1,
+        "playerCount": "1-4",
+        "image": "images/spirit-island.png"
+    },
+    {
+        "name": "Stenen Tijdperk",
+        "duration": 60,
+        "complexity": 2.5,
+        "playerCount": "2-4",
+        "image": "images/stenen-tijdperk.png"
+    }
+]
